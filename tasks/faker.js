@@ -13,38 +13,85 @@ module.exports = function(grunt) {
   // Please see the Grunt documentation for more information regarding task
   // creation: http://gruntjs.com/creating-tasks
 
+  var path = require('path');
+  var faker = require('faker');
+
+  // Remove brackets, grab any args
+  function getJsonFromTag(tag){
+    var func = tag.replace('{{', '').replace('}}', '');
+    var args = getArgsFromFunction(func);
+    var funcWithoutArgs = func.replace(/\(\.+?\)/g, '');
+
+    // grunt.log.writeln('args: ' + args);
+    // grunt.log.writeln('func: ' + func);
+    // grunt.log.writeln('funcWithoutArgs: ' + funcWithoutArgs);
+
+    return executeFunctionByName(funcWithoutArgs, faker, args);
+  }
+
+  // Return array of args from function string
+  function getArgsFromFunction(funcStr){
+    var pattern = /\((.+?)\)/g,
+    arg,
+    args = [];
+    
+    while (arg = pattern.exec(funcStr)) {
+      args.push(arg[1]);
+    }
+
+    return args;
+  }
+
+  // Execute function as string
+  function executeFunctionByName(functionName, context, args) {
+    var args = Array.prototype.slice.call(arguments).splice(2);
+    var namespaces = functionName.split(".");
+    var func = namespaces.pop();
+    for(var i = 0; i < namespaces.length; i++) {
+      context = context[namespaces[i]];
+    }
+    //return faker["Address"]["city"].apply(this);
+    return context[func].apply(this, args);
+  }
+
+  function processJsonFormat(jsonFormatStr){
+    var pattern = /\{\{(.+?)\}\}/g,
+    match;
+    var jsonStr = JSON.stringify(jsonFormatStr);
+    
+    while (match = pattern.exec(jsonStr)) {
+      jsonStr = jsonStr.replace(match[0], getJsonFromTag(match[1]));
+    }
+    return jsonStr;
+  }
+
   grunt.registerMultiTask('faker', 'Generate fake JSON with Faker.', function() {
-    // Merge task-specific and/or target-specific options with these defaults.
-    var options = this.options({
-      punctuation: '.',
-      separator: ', '
-    });
+    
+    var options = this.options();
+    var outputFilePath = options.out;
 
-    // Iterate over all specified file groups.
-    this.files.forEach(function(f) {
-      // Concat specified files.
-      var src = f.src.filter(function(filepath) {
-        // Warn on and remove invalid source files (if nonull was set).
-        if (!grunt.file.exists(filepath)) {
-          grunt.log.warn('Source file "' + filepath + '" not found.');
-          return false;
-        } else {
-          return true;
-        }
-      }).map(function(filepath) {
-        // Read file source.
-        return grunt.file.read(filepath);
-      }).join(grunt.util.normalizelf(options.separator));
+    // Check for format file
+    var jsonFormatPath = options.jsonFormat;
+    if (!grunt.file.exists(jsonFormatPath)) {
+      grunt.log.warn('Format file "' + jsonFormatPath + '" not found.');
+      return false;
+    }
 
-      // Handle options.
-      src += options.punctuation;
+    // Create dir if needed
+    var destDir = path.dirname(outputFilePath);
+    if (!grunt.file.exists(destDir)) {
+      grunt.file.mkdir(destDir);
+    }
 
-      // Write the destination file.
-      grunt.file.write(f.dest, src);
+    // Get json and parse with faker
+    var jsonFormatStr = grunt.file.readJSON(jsonFormatPath);
+    var outputJson = processJsonFormat(jsonFormatStr);
 
-      // Print a success message.
-      grunt.log.writeln('File "' + f.dest + '" created.');
-    });
+    // Write file with faker json data
+    grunt.file.write(outputFilePath, outputJson);
+
+    // Print a success message
+    grunt.log.writeln('File "' + outputFilePath + '" created.');
   });
 
 };

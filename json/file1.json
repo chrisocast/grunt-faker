@@ -1,0 +1,8 @@
+{
+  "author": { 
+    "firstname" : "{{Name.firstName}}",
+    "lastName" : "{{Name.lastName}}"
+  },
+  "city": "{{Address.city}}",
+  "secondname": "{{Name.firstName}}"
+}
