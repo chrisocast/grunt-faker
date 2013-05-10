@@ -1,8 +1,13 @@
 {
   "author": { 
     "firstname" : "{{Name.firstName}}",
-    "lastName" : "{{Name.lastName}}"
+    "lastName" : "{{Name.lastName}}",
+    "state": "{{random.us_state}}"
   },
   "city": "{{Address.city}}",
-  "secondname": "{{Name.firstName}}"
+  "socialaccount": [
+    "{{repeat(7)}}",
+    "{{Internet.email}}",
+    "{{Internet.email}}"
+  ]
 }
