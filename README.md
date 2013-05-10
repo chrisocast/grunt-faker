@@ -2,6 +2,9 @@
 
 > Generate fake JSON data with Faker.
 
+###Under development
+
+<!-- 
 ## Getting Started
 This plugin requires Grunt `~0.4.0`
 
@@ -87,3 +90,4 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 ## Release History
 _(Nothing yet)_
+ -->
