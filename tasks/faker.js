@@ -31,9 +31,10 @@ module.exports = function(grunt) {
     match, func, args;
 
     //todo: allow multiple {{tags}} in the same val
-    //todo: convert args to array here, not string
+    //todo: convert args to array here, in case there are multiple
     //todo: throw grunt error if users try to use 'Faker.definitions'
     //todo: handle {{repeat(x)}} function to avoid having to dupe similar objects
+    
     while (match = pattern.exec(value)) {
       //grunt.log.writeln("matches: "+ match[0] + ", " + match[1] + ", " + match[2]+ ", " + match[3]);
       func = match[1];
@@ -54,8 +55,8 @@ module.exports = function(grunt) {
       context = context[namespaces[i]];
     }
 
-    for(var i = 0; i < nsLength - 1; i++) {
-      parentContext = parentContext[namespaces[i]];
+    for(var j = 0; j < nsLength - 1; j++) {
+      parentContext = parentContext[namespaces[j]];
     }
 
     return context.apply(parentContext, [args]);
