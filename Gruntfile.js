@@ -32,7 +32,7 @@ module.exports = function(grunt) {
     Faker: {
       json: {
         options: {
-          jsonFormat: "json/file1.json",
+          jsonFormat: "json/file2.json",
           out: 'tmp/file1output.json'
         }
       }

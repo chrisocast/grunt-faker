@@ -10,96 +10,55 @@
 
 module.exports = function(grunt) {
 
-  // Please see the Grunt documentation for more information regarding task
-  // creation: http://gruntjs.com/creating-tasks
-
   var path = require('path');
   var Faker = require('Faker');
 
-  function repeat (num){
-    grunt.log.writeln("Faker.repeat");
-  };
-
-  function traverseJson(obj) {
+  // Loop through entire json object
+  function processJson(obj) {
     for (var i in obj) {
-
       if (typeof(obj[i]) === "object") {
-        // found an obj or array keep digging
-        traverseJson(obj[i], processTag);
-      } else {
-        if (obj[i] != null){
-          // not an obj or array, check for tags and process
-          grunt.log.writeln("found a val: " + obj[i]);
-          obj[i] = processTag(obj[i]);
-        }
+        processJson(obj[i]); // found an obj or array keep digging
+      } else if (obj[i] != null){
+        obj[i] = getFunctionNameAndArgs(obj[i]);// not an obj or array, check contents
       }
     }
     return obj;
   }
 
-  function processTag(value) {
-    var pattern = /\{\{(.+?)\}\}/g,
-    match;
-
-    grunt.log.writeln("Processing value1: "+value);
+  // Get func name, extract args, and exec on their values
+  function getFunctionNameAndArgs(value) {
+    var pattern = /\{\{([^()]+?)(\((.+)\))?\}\}/g,
+    match, func, args;
 
     //todo: allow multiple {{tags}} in the same val
+    //todo: convert args to array here, not string
+    //todo: throw grunt error if users try to use 'Faker.definitions'
+    //todo: handle {{repeat(x)}} function to avoid having to dupe similar objects
     while (match = pattern.exec(value)) {
-      grunt.log.writeln("Processing value2: "+ match[0] + ", " + match[1]);
-      value = value.replace(match[0], getJsonFromTag(match[1]));
+      //grunt.log.writeln("matches: "+ match[0] + ", " + match[1] + ", " + match[2]+ ", " + match[3]);
+      func = match[1];
+      args = match[3];
     }
-
-    return value;
+    return executeFunctionByName(func,args);
   }
 
-  // Remove brackets, grab any args
-  function getJsonFromTag(tag){
-    //var args = getArgsFromFunction(tag);
-    var funcWithoutArgs = tag.replace(/\(\.+?\)/g, '');
-
-    grunt.log.writeln("getJsonFromTag: "+funcWithoutArgs);
-    grunt.log.writeln("tag: "+tag);
-
-    if (functionName === 'repeat(7)'){
-      return executeFunctionByName(funcWithoutArgs/*, args*/); // make this iterate based on repeat
-    }
-
-    return executeFunctionByName(funcWithoutArgs/*, args*/);
-  }
-
-  // Return array of args from function string
-  // function getArgsFromFunction(funcStr){
-  //   var pattern = /\((.+?)\)/g,
-  //   arg,
-  //   args = [];
-  //   while (arg = pattern.exec(funcStr)) {
-  //     args.push(arg[1]);
-  //   }
-  //   return args;
-  // }
 
   // Execute function as string
   function executeFunctionByName(functionName, args) {
-    //var args = Array.prototype.slice.call(arguments).splice(2);
-
     var namespaces = functionName.split(".");
     var nsLength = namespaces.length;
     var context = Faker;
+    var parentContext = Faker;
+
     for(var i = 0; i < nsLength; i++) {
       context = context[namespaces[i]];
-          grunt.log.writeln("context: "+context);
-
     }
 
-    var parentContext = Faker;
     for(var i = 0; i < nsLength - 1; i++) {
       parentContext = parentContext[namespaces[i]];
     }
 
-    //grunt.log.writeln("nsLength: "+nsLength);
-    //grunt.log.writeln("parentContext: "+parentContext);
-
-    return context.apply(parentContext, [1]);
+    return context.apply(parentContext, [args]);
   }
 
   grunt.registerMultiTask('Faker', 'Generate fake JSON with Faker.', function() {
@@ -107,7 +66,7 @@ module.exports = function(grunt) {
     var options = this.options();
     var outputFilePath = options.out;
 
-    // Check for format file
+    // Check for json format file
     var jsonFormatPath = options.jsonFormat;
     if (!grunt.file.exists(jsonFormatPath)) {
       grunt.log.warn('Format file "' + jsonFormatPath + '" not found.');
@@ -122,10 +81,7 @@ module.exports = function(grunt) {
 
     // Get json and parse with Faker
     var json = grunt.file.readJSON(jsonFormatPath);
-
-    var outputJson = traverseJson(json);
-
-    //var outputJson = processJsonFormat(json);
+    var outputJson = processJson(json);
 
     // Write file with Faker json data
     grunt.file.write(outputFilePath, JSON.stringify(outputJson));

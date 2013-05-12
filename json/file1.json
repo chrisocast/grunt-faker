@@ -5,9 +5,8 @@
     "state": "{{random.us_state}}"
   },
   "city": "{{Address.city}}",
+  "words": "{{Lorem.words(4)}}",
   "socialaccount": [
-    "{{repeat(7)}}",
-    "{{Internet.email}}",
     "{{Internet.email}}"
   ]
 }
