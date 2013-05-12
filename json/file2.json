@@ -46,8 +46,10 @@
   "helpers" : [
     "{{Helpers.randomNumber(20)}}",
     "{{Helpers.randomize([1,2,3,4,5])}}",
-    "{{Helpers.slugify('teststring')}}",
-    "{{Helpers.replaceSymbolWithNumber('---', '-')}}",
+    "{{Helpers.randomize([\"name1\", \"name2\", \"name3\"])}}",
+    "{{Helpers.slugify('test slug & goes here!')}}",
+    "{{Helpers.replaceSymbolWithNumber('--#--', '-')}}",
+    "{{Helpers.replaceSymbolWithNumber('--#--')}}",
     "{{Helpers.shuffle([1,2,3,4,5])}}",
     "{{Helpers.createCard}}",
     "{{Helpers.userCard}}"
@@ -76,5 +78,8 @@
     "{{random.bs_noun}}",
     "{{random.phone_formats}}",
     "{{random.domain_suffix}}"
+  ],
+  "definitions" : [
+    "{{definitions.lorem}}"
   ]
 }

@@ -1,12 +1,5 @@
 {
-  "author": { 
-    "firstname" : "{{Name.firstName}}",
-    "lastName" : "{{Name.lastName}}",
-    "state": "{{random.us_state}}"
-  },
-  "city": "{{Address.city}}",
-  "words": "{{Lorem.words(4)}}",
-  "socialaccount": [
-    "{{Internet.email}}"
+  "helpers" : [
+    "{{Helpers.randomize([\"name1\", \"name2\", \"name3\"])}}"
   ]
 }
