@@ -1,4 +1,5 @@
-# grunt-faker
+# grunt-faker [![Build Status](https://api.travis-ci.org/chrisocast/grunt-faker.png?branch=master)](http://travis-ci.org/chrisocast/grunt-faker)
+
 
 Grunt task for specifying the shape of a JSON object with a basic tag syntax, then generating that object with the [Faker](https://github.com/Marak/Faker.js) library. Each time the task is run the data will look slightly different - making it easy to test against dynamic, ever-changing data sceanrios (like the real world).
 
