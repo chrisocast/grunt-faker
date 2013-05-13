@@ -1,6 +1,6 @@
 # grunt-faker
 
-Grunt task for specifying the shape of a JSON object with a basic tag syntax, then generating that object with the [Faker](https://github.com/Marak/Faker.js) library.
+Grunt task for specifying the shape of a JSON object with a basic tag syntax, then generating that object with the [Faker](https://github.com/Marak/Faker.js) library. Each time the task is run, the data will look slightly different, encouraging testing with real-world data scenarios.
 
 ## Getting Started
 This plugin requires Grunt `~0.4.0`
@@ -52,6 +52,47 @@ A string value that is a path to a JSON file with the desired format.
 Type: `String`
 
 A string value that is a path to the resulting JSON output file.
+
+### JSON format
+
+To choose how the output JSON will look, a double curly-bracket syntax is used to identify [Faker API](https://github.com/marak/Faker.js/#api) methods.
+
+#### Example JSON format file
+
+The JSON format below could be used to generate a fake customer data object. The strings ("id", "firstName", etc) will always remain static, while the object values will be randomly generated each time the task is run. 
+
+```js
+{
+  "customers" : [
+    {  
+      "id" : "{{random.number(999999)}}",
+      "firstName" : "{{Name.firstName}}",
+      "lastName" : "{{Name.lastName}}",
+      "streetAddress" : "{{Address.streetAddress}}",
+      "city" : "{{Address.city}}",
+      "state" : "{{Address.usState}}",
+      "zip" : "{{Address.zipCode}}"
+    }
+  ]
+}
+```
+#### Outputs as:
+
+```js
+{
+  "customers": [
+    {
+      "id": 269754,
+      "firstName": "Hester",
+      "lastName": "Kulas",
+      "streetAddress": "5750 Francis Manors",
+      "city": "Port Caylahaven",
+      "state": "New Mexico",
+      "zip": "20784-7095"
+    }
+  ]
+}
+```
 
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
