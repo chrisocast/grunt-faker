@@ -27,15 +27,13 @@ exports.faker = {
     // setup here if necessary
     done();
   },
-  // default_options: function(test) {
-  //   test.expect(1);
+  default_options: function(test) {
+    test.expect(1);
 
-  //   var actual = grunt.file.read('tmp/default_options');
-  //   var expected = grunt.file.read('test/expected/default_options');
-  //   test.equal(actual, expected, 'should describe what the default behavior is.');
+    test.ok(grunt.file.exists('tmp/test_all.json'), 'Test_all output file created.');
 
-  //   test.done();
-  // },
+    test.done();
+  },
   // custom_options: function(test) {
   //   test.expect(1);
 

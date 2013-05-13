@@ -1,6 +1,6 @@
 {
   "name" :[
-    { "Name.firstNam" : "{{Name.firstName}}" },
+    { "Name.firstName" : "{{Name.firstName}}" },
     { "Name.lastName" : "{{Name.lastName}}" },
     { "Name.findName" : "{{Name.findName}}" }
   ],
