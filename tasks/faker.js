@@ -78,7 +78,16 @@ module.exports = function(grunt) {
   grunt.registerMultiTask('faker', 'Generate fake JSON with faker.', function() {
     
     var options = this.options();
-    var outputFilePath = options.out;
+
+    // Check that options were provided 
+    if(!options.hasOwnProperty("out")){
+      grunt.log.warn('"out" option not specified.');
+      return false;
+    }
+    if(!options.hasOwnProperty("jsonFormat")){
+      grunt.log.warn('"jsonFormat" option not specified.');
+      return false;
+    }
 
     // Check for json format file
     var jsonFormatPath = options.jsonFormat;
@@ -88,6 +97,7 @@ module.exports = function(grunt) {
     }
 
     // Create dir if needed
+    var outputFilePath = options.out;
     var destDir = path.dirname(outputFilePath);
     if (!grunt.file.exists(destDir)) {
       grunt.file.mkdir(destDir);
