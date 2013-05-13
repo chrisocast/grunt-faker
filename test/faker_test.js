@@ -30,7 +30,7 @@ exports.faker = {
   default_options: function(test) {
     test.expect(1);
 
-    test.ok(grunt.file.exists('tmp/test_all.json'), 'Test_all output file created.');
+    test.ok(grunt.file.exists('tmp/test_all.json'), 'Test_all output file was created.');
 
     test.done();
   },
