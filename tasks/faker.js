@@ -18,7 +18,7 @@ module.exports = function(grunt) {
     for (var i in obj) {
       if (typeof(obj[i]) === "object") {
         processJson(obj[i]); // found an obj or array keep digging
-      } else if (obj[i] != null){
+      } else if (obj[i] !== null){
         obj[i] = getFunctionNameAndArgs(obj[i]);// not an obj or array, check contents
       }
     }
@@ -31,9 +31,15 @@ module.exports = function(grunt) {
     match, func, args;
     var argArray = [];
 
+
     while (match = pattern.exec(value)) {
       func = match[1];
       args = match[3];
+    }
+
+    // Value is not a {{grunt-faker}} tag
+    if (func === undefined){
+      return value;
     }
 
     if (args !== undefined ){
@@ -42,12 +48,14 @@ module.exports = function(grunt) {
         args = JSON.parse(args);
         argArray.push(args);
       } else {
+
         // one or more string/number params
         args = args.replace(/, /gi, ",");
         args = args.replace(/'/gi, "", "gi");
         argArray = args.split(',');
       }
     }
+
 
     return executeFunctionByName(func,argArray);
   }

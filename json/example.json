@@ -1,6 +1,7 @@
 {
   "customers" : [
     {  
+      "staticId" : "345234324",
       "id" : "{{random.number(999999)}}",
       "firstName" : "{{Name.firstName}}",
       "lastName" : "{{Name.lastName}}",
