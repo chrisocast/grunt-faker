@@ -1,10 +1,7 @@
 # grunt-faker
 
-> Generate fake JSON data with Faker.
+Grunt task for specifying the shape of a JSON object with a basic tag syntax, then generating that object with the [Faker](https://github.com/Marak/Faker.js) library.
 
-###Under development
-
-<!-- 
 ## Getting Started
 This plugin requires Grunt `~0.4.0`
 
@@ -28,66 +25,37 @@ In your project's Gruntfile, add a section named `faker` to the data object pass
 ```js
 grunt.initConfig({
   faker: {
-    options: {
-      // Task-specific options go here.
+    my_task: {
+      options: {
+        jsonFormat: "json/test_all.json",
+        out: 'tmp/test_all.json'
+      }
     },
-    your_target: {
-      // Target-specific file lists and/or options go here.
-    },
+    my_other_task: {
+      options: {
+        jsonFormat: "json/example.json",
+        out: 'tmp/example.json'
+      }
+    }
   },
 })
 ```
 
 ### Options
 
-#### options.separator
+#### options.jsonFormat
 Type: `String`
-Default value: `',  '`
 
-A string value that is used to do something with whatever.
+A string value that is a path to a JSON file with the desired format.
 
-#### options.punctuation
+#### options.out
 Type: `String`
-Default value: `'.'`
 
-A string value that is used to do something else with whatever else.
-
-### Usage Examples
-
-#### Default Options
-In this example, the default options are used to do something with whatever. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result would be `Testing, 1 2 3.`
-
-```js
-grunt.initConfig({
-  faker: {
-    options: {},
-    files: {
-      'dest/default_options': ['src/testing', 'src/123'],
-    },
-  },
-})
-```
-
-#### Custom Options
-In this example, custom options are used to do something else with whatever else. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result in this case would be `Testing: 1 2 3 !!!`
-
-```js
-grunt.initConfig({
-  faker: {
-    options: {
-      separator: ': ',
-      punctuation: ' !!!',
-    },
-    files: {
-      'dest/default_options': ['src/testing', 'src/123'],
-    },
-  },
-})
-```
+A string value that is a path to the resulting JSON output file.
 
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
 
 ## Release History
 _(Nothing yet)_
- -->
+ 
