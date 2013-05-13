@@ -11,9 +11,9 @@
 module.exports = function(grunt) {
 
   var path = require('path');
-  var faker = require('faker');
+  var Faker = require('Faker');
 
-  // Loop through entire json object
+  //FLoop through entire json object
   function processJson(obj) {
     for (var i in obj) {
       if (typeof(obj[i]) === "object") {
@@ -56,11 +56,11 @@ module.exports = function(grunt) {
   function executeFunctionByName(functionName, args) {
     var namespaces = functionName.split(".");
     var nsLength = namespaces.length;
-    var context = faker;
-    var parentContext = faker;
+    var context = Faker;
+    var parentContext = Faker;
 
     if (namespaces[0].toLowerCase() === 'definitions'){
-      grunt.log.warn('The definitions module from faker.js is not avail in this task.');
+      grunt.log.warn('The definitions module from Faker.js is not avail in this task.');
       return;
     }
 
