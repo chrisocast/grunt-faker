@@ -11,7 +11,7 @@
 module.exports = function(grunt) {
 
   var path = require('path');
-  var Faker = require('Faker');
+  var faker = require('faker');
 
   // Loop through entire json object
   function processJson(obj) {
@@ -56,11 +56,11 @@ module.exports = function(grunt) {
   function executeFunctionByName(functionName, args) {
     var namespaces = functionName.split(".");
     var nsLength = namespaces.length;
-    var context = Faker;
-    var parentContext = Faker;
+    var context = faker;
+    var parentContext = faker;
 
     if (namespaces[0].toLowerCase() === 'definitions'){
-      grunt.log.warn('The definitions module of Faker is not avail through this task.');
+      grunt.log.warn('The definitions module from faker.js is not avail in this task.');
       return;
     }
 
@@ -75,7 +75,7 @@ module.exports = function(grunt) {
     return context.apply(parentContext, args);
   }
 
-  grunt.registerMultiTask('Faker', 'Generate fake JSON with Faker.', function() {
+  grunt.registerMultiTask('faker', 'Generate fake JSON with faker.', function() {
     
     var options = this.options();
     var outputFilePath = options.out;
@@ -93,11 +93,11 @@ module.exports = function(grunt) {
       grunt.file.mkdir(destDir);
     }
 
-    // Get json and parse with Faker
+    // Get json and parse with faker
     var json = grunt.file.readJSON(jsonFormatPath);
     var outputJson = processJson(json);
 
-    // Write file with Faker json data
+    // Write file with faker json data
     grunt.file.write(outputFilePath, JSON.stringify(outputJson));
 
     // Print a success message
