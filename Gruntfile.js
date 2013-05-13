@@ -30,10 +30,16 @@ module.exports = function(grunt) {
 
     // Configuration to be run (and then tested).
     Faker: {
-      json: {
+      example: {
         options: {
-          jsonFormat: "json/file2.json",
-          out: 'tmp/file1output.json'
+          jsonFormat: "json/example.json",
+          out: 'tmp/example.json'
+        }
+      },
+      test_all: {
+        options: {
+          jsonFormat: "json/test_all.json",
+          out: 'tmp/test_all.json'
         }
       }
     },
@@ -55,7 +61,7 @@ module.exports = function(grunt) {
 
   // Whenever the "test" task is run, first clean the "tmp" dir, then run this
   // plugin's task(s), then test the result.
-  grunt.registerTask('test', ['clean', 'Faker:json', 'nodeunit']);
+  grunt.registerTask('test', ['clean', 'Faker:example', 'Faker:test_all', 'nodeunit']);
 
   // By default, lint and run all tests.
   grunt.registerTask('default', ['jshint', 'test']);

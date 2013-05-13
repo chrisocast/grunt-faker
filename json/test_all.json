@@ -1,0 +1,85 @@
+{
+  "name" :[
+    { "Name.firstNam" : "{{Name.firstName}}" },
+    { "Name.lastName" : "{{Name.lastName}}" },
+    { "Name.findName" : "{{Name.findName}}" }
+  ],
+  "address" : [
+    {"Address.zipCode" : "{{Address.zipCode}}" },
+    {"Address.zipCodeFormat(0)" : "{{Address.zipCodeFormat(0)}}" },
+    {"Address.city" : "{{Address.city}}" },
+    {"Address.streetName" : "{{Address.streetName}}" },
+    {"Address.streetAddress" : "{{Address.streetAddress}}" },
+    {"Address.secondaryAddress" : "{{Address.secondaryAddress}}" },
+    {"Address.brState" : "{{Address.brState}}" },
+    {"Address.ukCounty" : "{{Address.ukCounty}}" },
+    {"Address.ukCountry" : "{{Address.ukCountry}}" },
+    {"Address.usState" : "{{Address.usState}}" },
+    {"Address.latitude" : "{{Address.latitude}}" },
+    {"Address.longitude" : "{{Address.longitude}} }" }
+  ],
+  "phonenumber" : [
+    { "PhoneNumber.phoneNumber" : "{{PhoneNumber.phoneNumber}}" },
+    { "PhoneNumber.phoneNumberFormat(0)" : "{{PhoneNumber.phoneNumberFormat(0)}}" }
+  ],
+  "internet": [  
+    { "Internet.email" : "{{Internet.email}}" },
+    { "Internet.userName" : "{{Internet.userName}}" },
+    { "Internet.domainName" : "{{Internet.domainName}}" },
+    { "Internet.domainWord" : "{{Internet.domainWord}}" },
+    { "Internet.ip" : "{{Internet.ip}}" }
+  ],
+  "company": [
+    { "Company.suffixes" : "{{Company.suffixes}}" },
+    { "Company.companyName" : "{{Company.companyName}}" },
+    { "Company.companySuffix" : "{{Company.companySuffix}}" },
+    { "Company.catchPhrase" : "{{Company.catchPhrase}}" },
+    { "Company.bs" : "{{Company.bs}}" }
+  ],
+  "lorem" : [
+    {"Lorem.words(4)" : "{{Lorem.words(4)}}" },
+    {"Lorem.sentence(10)" : "{{Lorem.sentence(10)}}" },
+    {"Lorem.sentences(2)" : "{{Lorem.sentences(2)}}" },
+    {"Lorem.paragraph" : "{{Lorem.paragraph}}" },
+    {"Lorem.paragraphs" : "{{Lorem.paragraphs}}" }
+  ],
+  "helpers" : [
+    {"Helpers.randomNumber(10)" : "{{Helpers.randomNumber(10)}}" },
+    {"Helpers.randomize([1,2,3,4,5])" : "{{Helpers.randomize([1,2,3,4,5])}}" },
+    {"Helpers.randomize([\"name1\", \"name2\", \"name3\"])" : "{{Helpers.randomize([\"name1\", \"name2\", \"name3\"])}}" },
+    {"Helpers.slugify('test slug & goes here!')" : "{{Helpers.slugify('test slug & goes here!')}}" },
+    {"Helpers.replaceSymbolWithNumber('--#--', '-')" : "{{Helpers.replaceSymbolWithNumber('--#--', '-')}}" },
+    {"Helpers.replaceSymbolWithNumber('--#--')" : "{{Helpers.replaceSymbolWithNumber('--#--')}}" },
+    {"Helpers.shuffle([1,2,3,4,5])" : "{{Helpers.shuffle([1,2,3,4,5])}}" },
+    {"Helpers.createCard" : "{{Helpers.createCard}}" },
+    {"Helpers.userCard" : "{{Helpers.userCard}}" }
+  ],
+  "random" : [
+    {"random.number(20)" : "{{random.number(20)}}" },
+    {"random.array_element([1,2,3,4,5])" : "{{random.array_element([1,2,3,4,5])}}" },
+    {"random.city_prefix" : "{{random.city_prefix}}" },
+    {"random.city_suffix" : "{{random.city_suffix}}" },
+    {"random.street_suffix" : "{{random.street_suffix}}" },
+    {"random.br_state" : "{{random.br_state}}" },
+    {"random.br_state_abbr" : "{{random.br_state_abbr}}" },
+    {"random.us_state" : "{{random.us_state}}" },
+    {"random.us_state_abbr" : "{{random.us_state_abbr}}" },
+    {"random.uk_county" : "{{random.uk_county}}" },
+    {"random.uk_country" : "{{random.uk_country}}" },
+    {"random.first_name" : "{{random.first_name}}" },
+    {"random.last_name" : "{{random.last_name}}" },
+    {"random.name_prefix" : "{{random.name_prefix}}" },
+    {"random.name_suffix" : "{{random.name_suffix}}" },
+    {"random.catch_phrase_adjective" : "{{random.catch_phrase_adjective}}" },
+    {"random.catch_phrase_descriptor" : "{{random.catch_phrase_descriptor}}" },
+    {"random.catch_phrase_noun" : "{{random.catch_phrase_noun}}" },
+    {"random.bs_adjective" : "{{random.bs_adjective}}" },
+    {"random.bs_buzz" : "{{random.bs_buzz}}" },
+    {"random.bs_noun" : "{{random.bs_noun}}" },
+    {"random.phone_formats" : "{{random.phone_formats}}" },
+    {"random.domain_suffix" : "{{random.domain_suffix}}" }
+  ],
+  "definitions" : [
+    { "definitions.lorem" : "{{definitions.lorem}}" }
+  ]
+}

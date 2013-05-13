@@ -29,23 +29,16 @@ module.exports = function(grunt) {
   function getFunctionNameAndArgs(value) {
     var pattern = /\{\{([^()]+?)(\((.+)\))?\}\}/g,
     match, func, args;
-
     var argArray = [];
 
-    //todo: allow multiple {{tags}} in the same val
-    //todo: need testing for the args detection below
-    //todo: handle {{repeat(x)}} function to avoid having to dupe similar objects
-    //todo: if a Faker func requires a param, throw readable alert
-
     while (match = pattern.exec(value)) {
-      //grunt.log.writeln("matches: "+ match[0] + ", " + match[1] + ", " + match[2]+ ", " + match[3]);
       func = match[1];
       args = match[3];
     }
 
     if (args !== undefined ){
       if (args.indexOf("[") !== -1){
-        // is an array as string, parse to return proper array
+        // is an array as string
         args = JSON.parse(args);
         argArray.push(args);
       } else {
