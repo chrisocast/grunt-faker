@@ -1,0 +1,9 @@
+{
+  "internet": [  
+    { "Internet.email" : "{{Internet.email}}" },
+    { "Internet.userName" : "{{Internet.userName}}" },
+    { "Internet.domainName" : "{{Internet.domainName}}" },
+    { "Internet.domainWord" : "{{Internet.domainWord}}" },
+    { "Internet.ip" : "{{Internet.ip}}" }
+  ]
+}

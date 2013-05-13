@@ -13,7 +13,7 @@ module.exports = function(grunt) {
   var path = require('path');
   var Faker = require('Faker');
 
-  //FLoop through entire json object
+  //Loop through entire json object
   function processJson(obj) {
     for (var i in obj) {
       if (typeof(obj[i]) === "object") {

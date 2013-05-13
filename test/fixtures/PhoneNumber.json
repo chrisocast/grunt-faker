@@ -1,0 +1,6 @@
+{
+  "phonenumber" : [
+    { "PhoneNumber.phoneNumber" : "{{PhoneNumber.phoneNumber}}" },
+    { "PhoneNumber.phoneNumberFormat(0)" : "{{PhoneNumber.phoneNumberFormat(0)}}" }
+  ]
+}

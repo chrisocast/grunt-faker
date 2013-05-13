@@ -1,0 +1,9 @@
+{
+  "lorem" : [
+    {"Lorem.words(4)" : "{{Lorem.words(4)}}" },
+    {"Lorem.sentence(10)" : "{{Lorem.sentence(10)}}" },
+    {"Lorem.sentences(2)" : "{{Lorem.sentences(2)}}" },
+    {"Lorem.paragraph" : "{{Lorem.paragraph}}" },
+    {"Lorem.paragraphs" : "{{Lorem.paragraphs}}" }
+  ]
+}

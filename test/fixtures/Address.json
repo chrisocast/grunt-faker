@@ -1,0 +1,16 @@
+{
+  "address" : [
+    {"Address.zipCode" : "{{Address.zipCode}}" },
+    {"Address.zipCodeFormat(0)" : "{{Address.zipCodeFormat(0)}}" },
+    {"Address.city" : "{{Address.city}}" },
+    {"Address.streetName" : "{{Address.streetName}}" },
+    {"Address.streetAddress" : "{{Address.streetAddress}}" },
+    {"Address.secondaryAddress" : "{{Address.secondaryAddress}}" },
+    {"Address.brState" : "{{Address.brState}}" },
+    {"Address.ukCounty" : "{{Address.ukCounty}}" },
+    {"Address.ukCountry" : "{{Address.ukCountry}}" },
+    {"Address.usState" : "{{Address.usState}}" },
+    {"Address.latitude" : "{{Address.latitude}}" },
+    {"Address.longitude" : "{{Address.longitude}} }" }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "random" : [
+    {"random.number(20)" : "{{random.number(20)}}" },
+    {"random.array_element([1,2,3,4,5])" : "{{random.array_element([1,2,3,4,5])}}" },
+    {"random.city_prefix" : "{{random.city_prefix}}" },
+    {"random.city_suffix" : "{{random.city_suffix}}" },
+    {"random.street_suffix" : "{{random.street_suffix}}" },
+    {"random.br_state" : "{{random.br_state}}" },
+    {"random.br_state_abbr" : "{{random.br_state_abbr}}" },
+    {"random.us_state" : "{{random.us_state}}" },
+    {"random.us_state_abbr" : "{{random.us_state_abbr}}" },
+    {"random.uk_county" : "{{random.uk_county}}" },
+    {"random.uk_country" : "{{random.uk_country}}" },
+    {"random.first_name" : "{{random.first_name}}" },
+    {"random.last_name" : "{{random.last_name}}" },
+    {"random.name_prefix" : "{{random.name_prefix}}" },
+    {"random.name_suffix" : "{{random.name_suffix}}" },
+    {"random.catch_phrase_adjective" : "{{random.catch_phrase_adjective}}" },
+    {"random.catch_phrase_descriptor" : "{{random.catch_phrase_descriptor}}" },
+    {"random.catch_phrase_noun" : "{{random.catch_phrase_noun}}" },
+    {"random.bs_adjective" : "{{random.bs_adjective}}" },
+    {"random.bs_buzz" : "{{random.bs_buzz}}" },
+    {"random.bs_noun" : "{{random.bs_noun}}" },
+    {"random.phone_formats" : "{{random.phone_formats}}" },
+    {"random.domain_suffix" : "{{random.domain_suffix}}" }
+  ]
+}

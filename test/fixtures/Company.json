@@ -1,0 +1,9 @@
+{
+  "company": [
+    { "Company.suffixes" : "{{Company.suffixes}}" },
+    { "Company.companyName" : "{{Company.companyName}}" },
+    { "Company.companySuffix" : "{{Company.companySuffix}}" },
+    { "Company.catchPhrase" : "{{Company.catchPhrase}}" },
+    { "Company.bs" : "{{Company.bs}}" }
+  ]
+}
