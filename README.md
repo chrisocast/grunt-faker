@@ -1,6 +1,6 @@
 # grunt-faker
 
-Grunt task for specifying the shape of a JSON object with a basic tag syntax, then generating that object with the [Faker](https://github.com/Marak/Faker.js) library. Each time the task is run, the data will look slightly different, encouraging testing with varied, always changing (like the real world) data scenarios.
+Grunt task for specifying the shape of a JSON object with a basic tag syntax, then generating that object with the [Faker](https://github.com/Marak/Faker.js) library. Each time the task is run the data will look slightly different - making it easy to test against dynamic, ever-changing data sceanrios (like the real world).
 
 ## Getting Started
 This plugin requires Grunt `~0.4.0`
@@ -66,12 +66,16 @@ To choose how the output JSON will look, a double curly-bracket syntax is used t
   "customers" : [
     {  
       "id" : "{{random.number(999999)}}",
-      "firstName" : "{{Name.firstName}}",
-      "lastName" : "{{Name.lastName}}",
-      "streetAddress" : "{{Address.streetAddress}}",
-      "city" : "{{Address.city}}",
-      "state" : "{{Address.usState}}",
-      "zip" : "{{Address.zipCode}}"
+      "name" : {
+          "first" : "{{Name.firstName}}",
+          "last" : "{{Name.lastName}}"
+        },
+      "address" : {
+        "streetAddress" : "{{Address.streetAddress}}",
+        "city" : "{{Address.city}}",
+        "state" : "{{Address.usState}}",
+        "zip" : "{{Address.zipCode}}"
+      }
     }
   ]
 }
@@ -82,13 +86,17 @@ To choose how the output JSON will look, a double curly-bracket syntax is used t
 {
   "customers": [
     {
-      "id": 269754,
-      "firstName": "Hester",
-      "lastName": "Kulas",
-      "streetAddress": "5750 Francis Manors",
-      "city": "Port Caylahaven",
-      "state": "New Mexico",
-      "zip": "20784-7095"
+      "id": 110021,
+      "name": {
+        "first": "Emerald",
+        "last": "Hintz"
+      },
+      "address": {
+        "streetAddress": "0922 Huels Inlet",
+        "city": "Barneyberg",
+        "state": "New Hampshire",
+        "zip": "22819"
+      }
     }
   ]
 }
