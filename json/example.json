@@ -1,5 +1,13 @@
 {
-  "helpers" : [
-    "{{Helpers.randomize([\"name1\", \"name2\", \"name3\"])}}"
+  "customers" : [
+    {  
+      "id" : "{{random.number(999999)}}",
+      "firstName" : "{{Name.firstName}}",
+      "lastName" : "{{Name.lastName}}",
+      "streetAddress" : "{{Address.streetAddress}}",
+      "city" : "{{Address.city}}",
+      "state" : "{{Address.usState}}",
+      "zip" : "{{Address.zipCode}}"
+    }
   ]
 }
