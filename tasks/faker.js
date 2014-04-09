@@ -18,7 +18,7 @@ module.exports = function(grunt) {
     for (var i in obj) {
       if (typeof(obj[i]) === "object") {
         processJson(obj[i]); // found an obj or array keep digging
-      } else if (obj[i] !== null){
+      } else if (obj[i] != null){
         obj[i] = getFunctionNameAndArgs(obj[i]);// not an obj or array, check contents
       }
     }
@@ -27,19 +27,15 @@ module.exports = function(grunt) {
 
   // Get func name, extract args, and exec on their values
   function getFunctionNameAndArgs(value) {
-    var pattern = /\{\{([^()]+?)(\((.+)\))?\}\}/g,
+    var pattern = /^(.*)\{\{([^()]+?)(\((.+)\))?\}\}(.*)$/g,
     match, func, args;
-    var argArray = [];
-
+    var argArray = [], surroundings = [];
 
     while (match = pattern.exec(value)) {
-      func = match[1];
-      args = match[3];
-    }
-
-    // Value is not a {{grunt-faker}} tag
-    if (func === undefined){
-      return value;
+      surroundings[0] = match[1];
+      func = match[2];
+      args = match[4];
+      surroundings[1] = match[5];
     }
 
     if (args !== undefined ){
@@ -48,17 +44,16 @@ module.exports = function(grunt) {
         args = JSON.parse(args);
         argArray.push(args);
       } else {
-
         // one or more string/number params
         args = args.replace(/, /gi, ",");
         args = args.replace(/'/gi, "", "gi");
         argArray = args.split(',');
       }
     }
-
-
     // return value if no Faker method is detected
-    return func ? executeFunctionByName(func,argArray) : value;
+    return func
+      ? (surroundings[0] + executeFunctionByName(func,argArray) + surroundings[1])
+      : value;
   }
 
   // Execute function as string
