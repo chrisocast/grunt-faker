@@ -57,7 +57,8 @@ module.exports = function(grunt) {
     }
 
 
-    return executeFunctionByName(func,argArray);
+    // return value if no Faker method is detected
+    return func ? executeFunctionByName(func,argArray) : value;
   }
 
   // Execute function as string
