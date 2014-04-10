@@ -28,7 +28,7 @@
     "test": "grunt"
   },
   "dependencies": {
-    "Faker": "~0.5.8"
+    "Faker": "^0.7.0"
   },
   "devDependencies": {
     "grunt-contrib-jshint": "~0.1.1",
