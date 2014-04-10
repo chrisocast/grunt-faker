@@ -86,10 +86,15 @@ module.exports = function(grunt) {
   grunt.registerMultiTask('faker', 'Generate fake JSON with faker.', function() {
     
     var options = this.options();
+    var outs = grunt.util.toArray(options.out);
 
     // Check that options were provided 
     if(!options.hasOwnProperty("out")){
       grunt.log.warn('"out" option not specified.');
+      return false;
+    }
+    if(Array.isArray(options.jsonFormat)){
+      grunt.log.warn('"jsonFormat" option has to be a single file.');
       return false;
     }
     if(!options.hasOwnProperty("jsonFormat")){
@@ -104,22 +109,21 @@ module.exports = function(grunt) {
       return false;
     }
 
-    // Create dir if needed
-    var outputFilePath = options.out;
-    var destDir = path.dirname(outputFilePath);
-    if (!grunt.file.exists(destDir)) {
-      grunt.file.mkdir(destDir);
-    }
+    outs.forEach(function(outputFilePath) {
+      // Create dir if needed
+      var destDir = path.dirname(outputFilePath);
+      if (!grunt.file.exists(destDir)) {
+        grunt.file.mkdir(destDir);
+      }
 
-    // Get json and parse with faker
-    var json = grunt.file.readJSON(jsonFormatPath);
-    var outputJson = processJson(json);
+      // Get json and parse with faker
+      var json = grunt.file.readJSON(jsonFormatPath);
+      var outputJson = processJson(json);
 
-    // Write file with faker json data
-    grunt.file.write(outputFilePath, JSON.stringify(outputJson));
+      // Write file with faker json data
+      grunt.file.write(outputFilePath, JSON.stringify(outputJson));
 
-    // Print a success message
-    grunt.log.writeln('File "' + outputFilePath + '" created.');
+      // Print a success message
+      grunt.verbose.writeln('File "' + outputFilePath + '" created.');
+    });
   });
-
-};
