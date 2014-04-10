@@ -86,7 +86,7 @@ module.exports = function(grunt) {
   grunt.registerMultiTask('faker', 'Generate fake JSON with faker.', function() {
     
     var options = this.options();
-    var outs = grunt.util.toArray(options.out);
+    var outs = Array.isArray(options.out) ? options.out : [options.out];
 
     // Check that options were provided 
     if(!options.hasOwnProperty("out")){
@@ -127,3 +127,5 @@ module.exports = function(grunt) {
       grunt.verbose.writeln('File "' + outputFilePath + '" created.');
     });
   });
+
+};
