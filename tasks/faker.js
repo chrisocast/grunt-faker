@@ -30,12 +30,13 @@ module.exports = function(grunt) {
     var pattern = /^(.*)\{\{([^()]+?)(\((.+)\))?\}\}(.*)$/g,
     match, func, args;
     var argArray = [], surroundings = [];
+    var retValue;
 
     while (match = pattern.exec(value)) {
-      surroundings[0] = match[1] || null; // if nothing then set the value explicit to null to avoid empty string concatenations
+      surroundings[0] = match[1];
       func = match[2];
       args = match[4];
-      surroundings[1] = match[5] || null; // if nothing then set the value explicit to null to avoid empty string concatenations
+      surroundings[1] = match[5];
     }
 
     if (args !== undefined ){
@@ -51,9 +52,19 @@ module.exports = function(grunt) {
       }
     }
     // return value if no Faker method is detected
-    return func ?
-      (surroundings[0] + executeFunctionByName(func,argArray) + surroundings[1]) :
+    retValue = func ?
+      executeFunctionByName(func,argArray) :
       value;
+
+    if(surroundings[0]) {	// prefix
+    	retValue = surroundings[0] + retValue;
+    }
+
+    if(surroundings[1]) {	// postfix
+    	retValue += surroundings[1];
+    }
+
+    return retValue;
   }
 
   // Execute function as string
