@@ -81,5 +81,9 @@
   ],
   "definitions" : [
     { "definitions.lorem" : "{{definitions.lorem}}" }
+  ],
+  "padding": [
+  	{ "padding.prefix": "lorem{{random.number(9)}}" },
+  	{ "padding.postfix": "{{random.number(9)}}lorem" }
   ]
 }
