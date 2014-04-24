@@ -1,5 +1,4 @@
 'use strict';
-
 var grunt = require('grunt');
 
 /*
@@ -22,25 +21,7 @@ var grunt = require('grunt');
     test.ifError(value)
 */
 
-exports.faker = {
-  setUp: function(done) {
-    // setup here if necessary
-    done();
-  },
-  default_options: function(test) {
-    test.expect(1);
-
-    test.ok(grunt.file.exists('tmp/test_all.json'), 'Test_all output file was created.');
-
-    test.done();
-  },
-  // custom_options: function(test) {
-  //   test.expect(1);
-
-  //   var actual = grunt.file.read('tmp/custom_options');
-  //   var expected = grunt.file.read('test/expected/custom_options');
-  //   test.equal(actual, expected, 'should describe what the custom option(s) behavior is.');
-
-  //   test.done();
-  // },
+exports.testFileCreated = function(test) {
+  test.ok(grunt.file.exists('tmp/test_all.json'), 'Test_all.js output file was created.');
+  test.done();
 };

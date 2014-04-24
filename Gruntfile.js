@@ -2,7 +2,7 @@
  * grunt-faker
  * https://github.com/chrisocast/grunt-faker
  *
- * Copyright (c) 2013 Chris Cast
+ * Copyright (c) 2014 Chris Cast
  * Licensed under the MIT license.
  */
 
@@ -51,19 +51,15 @@ module.exports = function(grunt) {
 
   });
 
-  // Actually load this plugin's task(s).
+  // Load the grunt-faker task
   grunt.loadTasks('tasks');
 
-  // These plugins provide necessary tasks.
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-nodeunit');
 
-  // Whenever the "test" task is run, first clean the "tmp" dir, then run this
-  // plugin's task(s), then test the result.
-  grunt.registerTask('test', ['clean', 'faker:example', 'faker:test_all', 'nodeunit']);
-
-  // By default, lint and run all tests.
-  grunt.registerTask('default', ['jshint', 'test']);
+  grunt.registerTask('default', ['clean', 'jshint', 'test']);
+  grunt.registerTask('example', ['clean', 'faker:example']);
+  grunt.registerTask('test', ['clean', 'faker:test_all', 'nodeunit']);
 
 };
