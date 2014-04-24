@@ -32,10 +32,10 @@ module.exports = function(grunt) {
     var argArray = [], surroundings = [];
 
     while (match = pattern.exec(value)) {
-      surroundings[0] = match[1];
+      surroundings[0] = match[1] || null; // if nothing then set the value explicit to null to avoid empty string concatenations
       func = match[2];
       args = match[4];
-      surroundings[1] = match[5];
+      surroundings[1] = match[5] || null; // if nothing then set the value explicit to null to avoid empty string concatenations
     }
 
     if (args !== undefined ){
