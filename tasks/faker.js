@@ -27,19 +27,16 @@ module.exports = function(grunt) {
 
   // Get func name, extract args, and exec on their values
   function getFunctionNameAndArgs(value) {
-    var pattern = /\{\{([^()]+?)(\((.+)\))?\}\}/g,
+    var pattern = /^(.*)\{\{([^()]+?)(\((.+)\))?\}\}(.*)$/g,
     match, func, args;
-    var argArray = [];
-
+    var argArray = [], surroundings = [];
+    var retValue;
 
     while (match = pattern.exec(value)) {
-      func = match[1];
-      args = match[3];
-    }
-
-    // Value is not a {{grunt-faker}} tag
-    if (func === undefined){
-      return value;
+      surroundings[0] = match[1];
+      func = match[2];
+      args = match[4];
+      surroundings[1] = match[5];
     }
 
     if (args !== undefined ){
@@ -48,16 +45,26 @@ module.exports = function(grunt) {
         args = JSON.parse(args);
         argArray.push(args);
       } else {
-
         // one or more string/number params
         args = args.replace(/, /gi, ",");
         args = args.replace(/'/gi, "", "gi");
         argArray = args.split(',');
       }
     }
+    // return value if no Faker method is detected
+    retValue = func ?
+      executeFunctionByName(func,argArray) :
+      value;
 
+    if(surroundings[0]) {	// prefix
+    	retValue = surroundings[0] + retValue;
+    }
 
-    return executeFunctionByName(func,argArray);
+    if(surroundings[1]) {	// postfix
+    	retValue += surroundings[1];
+    }
+
+    return retValue;
   }
 
   // Execute function as string
@@ -86,10 +93,15 @@ module.exports = function(grunt) {
   grunt.registerMultiTask('faker', 'Generate fake JSON with faker.', function() {
     
     var options = this.options();
+    var outs = Array.isArray(options.out) ? options.out : [options.out];
 
     // Check that options were provided 
     if(!options.hasOwnProperty("out")){
       grunt.log.warn('"out" option not specified.');
+      return false;
+    }
+    if(Array.isArray(options.jsonFormat)){
+      grunt.log.warn('"jsonFormat" option has to be a single file.');
       return false;
     }
     if(!options.hasOwnProperty("jsonFormat")){
@@ -104,22 +116,23 @@ module.exports = function(grunt) {
       return false;
     }
 
-    // Create dir if needed
-    var outputFilePath = options.out;
-    var destDir = path.dirname(outputFilePath);
-    if (!grunt.file.exists(destDir)) {
-      grunt.file.mkdir(destDir);
-    }
+    outs.forEach(function(outputFilePath) {
+      // Create dir if needed
+      var destDir = path.dirname(outputFilePath);
+      if (!grunt.file.exists(destDir)) {
+        grunt.file.mkdir(destDir);
+      }
 
-    // Get json and parse with faker
-    var json = grunt.file.readJSON(jsonFormatPath);
-    var outputJson = processJson(json);
+      // Get json and parse with faker
+      var json = grunt.file.readJSON(jsonFormatPath);
+      var outputJson = processJson(json);
 
-    // Write file with faker json data
-    grunt.file.write(outputFilePath, JSON.stringify(outputJson));
+      // Write file with faker json data
+      grunt.file.write(outputFilePath, JSON.stringify(outputJson));
 
-    // Print a success message
-    grunt.log.writeln('File "' + outputFilePath + '" created.');
+      // Print a success message
+      grunt.verbose.writeln('File "' + outputFilePath + '" created.');
+    });
   });
 
 };

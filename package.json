@@ -1,7 +1,7 @@
 {
   "name": "grunt-faker",
   "description": "Generate fake JSON data with Faker.",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "homepage": "https://github.com/chrisocast/grunt-faker",
   "author": {
     "name": "Chris Cast",
@@ -28,11 +28,11 @@
     "test": "grunt"
   },
   "dependencies": {
-    "Faker": "~0.5.8"
+    "Faker": "~0.7.0"
   },
   "devDependencies": {
-    "grunt-contrib-jshint": "~0.1.1",
-    "grunt-contrib-clean": "~0.4.0",
+    "grunt-contrib-jshint": "~0.10.0",
+    "grunt-contrib-clean": "~0.5.0",
     "grunt-contrib-nodeunit": "~0.3.3",
     "grunt": "~0.4.4"
   },
