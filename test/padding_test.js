@@ -9,7 +9,7 @@ exports.padding = {
   },
 
   prefix : function(test){
-  	var expected = /lorem\d/;
+    var expected = /lorem\d/;
     var output = this.output[0]['padding.prefix'];
     test.expect(3);
     test.ok(output.length > 0, 'prefix created');
@@ -19,7 +19,7 @@ exports.padding = {
   },
 
   postfix : function(test){
-  	var expected = /\dlorem/;
+    var expected = /\dlorem/;
     var output = this.output[1]['padding.postfix'];
     test.expect(3);
     test.ok(output.length > 0, 'postfix created');

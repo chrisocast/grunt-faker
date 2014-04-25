@@ -57,11 +57,11 @@ module.exports = function(grunt) {
       value;
 
     if(surroundings[0]) {	// prefix
-    	retValue = surroundings[0] + retValue;
+      retValue = surroundings[0] + retValue;
     }
 
     if(surroundings[1]) {	// postfix
-    	retValue += surroundings[1];
+      retValue += surroundings[1];
     }
 
     return retValue;
