@@ -1,5 +1,5 @@
 v0.2.0:
-	data: 2014-04-25
+	date: 2014-04-25
 	changes:
 		- Support for writing JSON data into multiple files and pre/post fixing values
 		- Updated dependencies
