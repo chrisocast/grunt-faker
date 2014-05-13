@@ -18,8 +18,8 @@ module.exports = function(grunt) {
     for (var i in obj) {
       if (typeof(obj[i]) === "object") {
         processJson(obj[i]); // found an obj or array keep digging
-      } else if (obj[i] !== null){
-        obj[i] = getFunctionNameAndArgs(obj[i]);// not an obj or array, check contents
+      } else if (typeof(obj[i]) === 'string'){
+        obj[i] = getFunctionNameAndArgs(obj[i]);// only check contents of strings
       }
     }
     return obj;
@@ -91,11 +91,11 @@ module.exports = function(grunt) {
   }
 
   grunt.registerMultiTask('faker', 'Generate fake JSON with faker.', function() {
-    
+
     var options = this.options();
     var outs = Array.isArray(options.out) ? options.out : [options.out];
 
-    // Check that options were provided 
+    // Check that options were provided
     if(!options.hasOwnProperty("out")){
       grunt.log.warn('"out" option not specified.');
       return false;
